@@ -34,12 +34,11 @@ int Stack::top() {
     return box[sp - 1];
 }
 
-void polish_calc(char in, Stack& s) {
+void polish_calc(char in, Stack& s, string sin) {
     int op1 = 0;
     int op2 = 0;
+    
     switch (in){
-        case ' ':
-            break;
         case '+':
             op1 = s.top();
             s.pop();
@@ -53,20 +52,25 @@ void polish_calc(char in, Stack& s) {
             op2 = s.top();
             s.pop();
             s.push(op2 - op1);
+            break;
         case '*':
             op1 = s.top();
             s.pop();
             op2 = s.top();
             s.pop();
             s.push(op1 * op2);
+            break;
         case '/':
             op1 = s.top();
             s.pop();
             op2 = s.top();
             s.pop();
             s.push(op2 / op1);
+            break;
         default:
-            s.push(in - '0');
+            istringstream is(sin);
+            is >> op1;
+            s.push(op1);
     }
 }
 
@@ -75,11 +79,14 @@ int main() {
     string input;
     getline(cin, input, '\n');
 
+    istringstream is(input);
+
 
     int i = 0;
-    while (i < input.length()){
-        char in = input[i];
-        polish_calc(in, s);
+    while (!is.eof()){
+        string in;
+        is >> in;
+        polish_calc(in[0], s, in);
     }
 
     cout << s.top() << endl;
