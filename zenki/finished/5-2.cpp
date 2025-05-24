@@ -1,4 +1,4 @@
-#define QMAX 10
+#define QMAX 100000
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,10 +28,10 @@ bool Queue::empty() {
 
 void Queue::enqueue(Process item) {
     p_pool[back] = item;
-    back = (back + 1)/QMAX;
+    back = (back + 1) % QMAX;
 }
 void Queue::dequeue() {
-    front = (front + 1)/QMAX;
+    front = (front + 1) % QMAX;
 }
 
 Process Queue::top() {
@@ -47,12 +47,24 @@ int main() {
     int i = 0;
     while (i < n){
         cin >> p_name >> time;
-        cout << p_name << " " << time << endl;
         Process p = { p_name, time };
         que.enqueue(p);
         i++;
     }
-
-    i = 0;
     
+    int now = 0;
+    while (!que.empty()){
+        Process p = que.top();
+        
+        if(p.time <= q) {
+            now += p.time;
+            cout << p.name << " " << now << endl;
+            que.dequeue();
+        } else {
+            now += q;
+            p.time -= q;
+            que.dequeue();
+            que.enqueue(p);
+        }
+    }
 }

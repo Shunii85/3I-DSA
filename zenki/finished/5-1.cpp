@@ -74,6 +74,11 @@ void polish_calc(char in, Stack& s, string sin) {
     }
 }
 
+/**
+ * memo
+ * - istringstreamを使うと、空白区切りで再度文字を受け付けられる。数値に変換することも可能
+ */
+
 int main() {
     Stack s;
     string input;
