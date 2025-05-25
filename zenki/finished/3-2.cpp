@@ -12,10 +12,6 @@ struct Node {
     vector<Node*> children;
 };
 
-bool compare_id(Node& n1, Node& n2) {
-    return (n1.id < n2.id);
-}
-
 void calc_depth(Node& n, int now_dep) {
     now_dep += 1;
     for(auto& child : n.children) {
