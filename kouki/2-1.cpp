@@ -18,15 +18,12 @@ int main() {
     while (){
         /* code */
     }
-    
 }
 
 
 /**
  * @see https://daeudaeu.com/kmp/
- */
-
-/**
+ *
  * 失敗したとき、
  * その直前の部分文字列と
  * 先頭からの部分文字列が
@@ -34,7 +31,6 @@ int main() {
  * 次の比較はその部分を
  * 飛ばすことができる
  */
-
 void compf(string p, int f[]) {
     f[0] = -1;
     f[1] = 0;
